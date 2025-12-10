@@ -2,7 +2,8 @@
   "header": {
     "title": "🎵 Collection d'albums",
     "subtitle": "Découvrez des albums de musique",
-    "language": "Langue"
+    "language": "Langue",
+    "cart": "Panier"
   },
   "loading": {
     "text": "Chargement des albums..."
@@ -15,5 +16,14 @@
     "addToCart": "Ajouter au panier",
     "preview": "Aperçu",
     "price": "${price}"
+  },
+  "cart": {
+    "title": "Panier d'achat",
+    "empty": "Votre panier est vide",
+    "remove": "Retirer",
+    "clear": "Vider le panier",
+    "total": "Total",
+    "close": "Fermer le panier",
+    "confirmClear": "Êtes-vous sûr de vouloir vider votre panier ?"
   }
 }

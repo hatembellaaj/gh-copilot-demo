@@ -21,7 +21,7 @@
     </div>
     
     <div class="album-actions">
-      <button class="btn btn-primary">{{ $t('album.addToCart') }}</button>
+      <button class="btn btn-primary" @click="addToCart(album)">{{ $t('album.addToCart') }}</button>
       <button class="btn btn-secondary">{{ $t('album.preview') }}</button>
     </div>
   </div>
@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import type { Album } from '../types/album'
+import { cart } from '../store/cart'
 
 interface Props {
   album: Album
@@ -39,6 +40,10 @@ defineProps<Props>()
 const handleImageError = (event: Event): void => {
   const target = event.target as HTMLImageElement
   target.src = 'https://via.placeholder.com/300x300/667eea/white?text=Album+Cover'
+}
+
+const addToCart = (album: Album): void => {
+  cart.add(album)
 }
 </script>
 

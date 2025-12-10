@@ -2,7 +2,8 @@
   "header": {
     "title": "🎵 Album Collection",
     "subtitle": "Discover amazing music albums",
-    "language": "Language"
+    "language": "Language",
+    "cart": "Cart"
   },
   "loading": {
     "text": "Loading albums..."
@@ -15,5 +16,14 @@
     "addToCart": "Add to Cart",
     "preview": "Preview",
     "price": "${price}"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "remove": "Remove",
+    "clear": "Clear Cart",
+    "total": "Total",
+    "close": "Close cart",
+    "confirmClear": "Are you sure you want to clear your cart?"
   }
 }

@@ -2,7 +2,8 @@
   "header": {
     "title": "🎵 Album-Sammlung",
     "subtitle": "Entdecke großartige Musikalben",
-    "language": "Sprache"
+    "language": "Sprache",
+    "cart": "Warenkorb"
   },
   "loading": {
     "text": "Alben werden geladen..."
@@ -15,5 +16,14 @@
     "addToCart": "In den Warenkorb",
     "preview": "Vorschau",
     "price": "${price}"
+  },
+  "cart": {
+    "title": "Einkaufswagen",
+    "empty": "Dein Warenkorb ist leer",
+    "remove": "Entfernen",
+    "clear": "Warenkorb leeren",
+    "total": "Gesamt",
+    "close": "Warenkorb schließen",
+    "confirmClear": "Bist du sicher, dass du deinen Warenkorb leeren möchtest?"
   }
 }

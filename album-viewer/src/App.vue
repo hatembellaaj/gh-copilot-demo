@@ -6,13 +6,19 @@
           <h1>{{ t('header.title') }}</h1>
           <p>{{ t('header.subtitle') }}</p>
         </div>
-        <div class="lang-select">
-          <label for="lang">{{ t('header.language') }}</label>
-          <select id="lang" v-model="locale" @change="changeLocale">
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-          </select>
+        <div class="header-controls">
+          <button class="cart-btn" @click="toggleCart" :aria-label="t('header.cart') + ': ' + cart.count.value">
+            <span class="cart-icon">🛒</span>
+            <span v-if="cart.count.value > 0" class="cart-badge">{{ cart.count.value }}</span>
+          </button>
+          <div class="lang-select">
+            <label for="lang">{{ t('header.language') }}</label>
+            <select id="lang" v-model="locale" @change="changeLocale">
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+            </select>
+          </div>
         </div>
       </div>
     </header>
@@ -36,6 +42,8 @@
         />
       </div>
     </main>
+
+    <CartPanel :is-open="isCartOpen" @close="toggleCart" />
   </div>
 </template>
 
@@ -44,17 +52,24 @@ import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import axios from 'axios'
 import AlbumCard from './components/AlbumCard.vue'
+import CartPanel from './components/CartPanel.vue'
+import { cart } from './store/cart'
 import type { Album } from './types/album'
 
 const albums = ref<Album[]>([])
 const loading = ref<boolean>(true)
 const error = ref<string | null>(null)
+const isCartOpen = ref<boolean>(false)
 
 const { t, locale: i18nLocale } = useI18n()
 const locale = ref<string>(i18nLocale.value)
 
 const changeLocale = (): void => {
   i18nLocale.value = locale.value as 'en' | 'fr' | 'de'
+}
+
+const toggleCart = (): void => {
+  isCartOpen.value = !isCartOpen.value
 }
 
 const fetchAlbums = async (): Promise<void> => {
@@ -92,6 +107,52 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-btn {
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cart-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.cart-icon {
+  font-size: 1.5rem;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 2px solid white;
 }
 
 .lang-select {
