@@ -1,19 +1,31 @@
 <template>
   <div class="app">
     <header class="header">
-      <h1>🎵 Album Collection</h1>
-      <p>Discover amazing music albums</p>
+      <div class="header-row">
+        <div>
+          <h1>{{ t('header.title') }}</h1>
+          <p>{{ t('header.subtitle') }}</p>
+        </div>
+        <div class="lang-select">
+          <label for="lang">{{ t('header.language') }}</label>
+          <select id="lang" v-model="locale" @change="changeLocale">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </div>
+      </div>
     </header>
 
     <main class="main">
       <div v-if="loading" class="loading">
         <div class="spinner"></div>
-        <p>Loading albums...</p>
+        <p>{{ t('loading.text') }}</p>
       </div>
 
       <div v-else-if="error" class="error">
         <p>{{ error }}</p>
-        <button @click="fetchAlbums" class="retry-btn">Try Again</button>
+        <button @click="fetchAlbums" class="retry-btn">{{ t('error.retry') }}</button>
       </div>
 
       <div v-else class="albums-grid">
@@ -29,6 +41,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import axios from 'axios'
 import AlbumCard from './components/AlbumCard.vue'
 import type { Album } from './types/album'
@@ -36,6 +49,13 @@ import type { Album } from './types/album'
 const albums = ref<Album[]>([])
 const loading = ref<boolean>(true)
 const error = ref<string | null>(null)
+
+const { t, locale: i18nLocale } = useI18n()
+const locale = ref<string>(i18nLocale.value)
+
+const changeLocale = (): void => {
+  i18nLocale.value = locale.value as 'en' | 'fr' | 'de'
+}
 
 const fetchAlbums = async (): Promise<void> => {
   try {
@@ -66,6 +86,18 @@ onMounted(() => {
   text-align: center;
   margin-bottom: 3rem;
   color: white;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lang-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .header h1 {

@@ -1,0 +1,19 @@
+{
+  "header": {
+    "title": "🎵 Collection d'albums",
+    "subtitle": "Découvrez des albums de musique",
+    "language": "Langue"
+  },
+  "loading": {
+    "text": "Chargement des albums..."
+  },
+  "error": {
+    "text": "Échec du chargement des albums. Assurez-vous que l'API est démarrée.",
+    "retry": "Réessayer"
+  },
+  "album": {
+    "addToCart": "Ajouter au panier",
+    "preview": "Aperçu",
+    "price": "${price}"
+  }
+}
